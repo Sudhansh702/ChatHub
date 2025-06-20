@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+.glow {
+  background-color: #333;
+  box-shadow: -40px -300px 200px 150px #0739c45d;
+}
+* {
+  font-family: "Gabarito", sans-serif;
+  font-optical-sizing: auto;
+  /* font-weight: 400; */
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -1,0 +1,455 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Messages UI
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Scrollbar for dark backgrounds */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4b5563;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+ </head>
+ <body class="bg-gradient-to-b from-[#1a1f2e] to-[#12151f] min-h-screen flex items-center justify-center p-4">
+  <div class="flex flex-col md:flex-row gap-6 max-w-[1200px] w-full">
+   <!-- Left Panel -->
+   <section aria-label="Messages list" class="bg-[#1f2433] rounded-3xl w-full max-w-[360px] flex flex-col p-5 text-gray-300">
+    <header class="flex items-center justify-between mb-4">
+     <button aria-label="Menu" class="text-gray-400 text-xl">
+      <i class="fas fa-bars">
+      </i>
+     </button>
+     <h1 class="text-lg font-semibold">
+      Messages
+      <span class="text-gray-400">
+       (32)
+      </span>
+     </h1>
+     <div class="flex space-x-3 text-gray-400 text-xl">
+      <button aria-label="Search">
+       <i class="fas fa-search">
+       </i>
+      </button>
+      <button aria-label="New message" class="text-pink-600">
+       <i class="fas fa-plus-square">
+       </i>
+      </button>
+     </div>
+    </header>
+    <nav class="flex space-x-4 mb-5 text-sm font-medium">
+     <button aria-current="page" class="px-3 py-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 text-white">
+      General
+     </button>
+     <button class="px-3 py-1 rounded-full hover:text-pink-600">
+      Favourite *
+     </button>
+     <button class="px-3 py-1 rounded-full hover:text-pink-600">
+      Requests
+     </button>
+    </nav>
+    <section aria-label="Pinned message" class="bg-[#2a2f42] rounded-xl p-3 mb-5 flex items-center gap-3">
+     <img alt="Profile picture of Jaime, a young man with short hair and glasses" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b7241343-6bdb-4238-ab2c-5bfc2ab5d992.jpg" width="40"/>
+     <div class="flex-1">
+      <p class="text-sm font-semibold text-white">
+       Jaime
+      </p>
+      <p class="text-xs text-gray-400">
+       Let's Do it now!
+      </p>
+     </div>
+     <time class="text-xs text-gray-500 select-none" datetime="2023-06-17" title="Pinned message date June 17">
+      17 Jun
+     </time>
+     <button aria-label="More options" class="text-gray-400 hover:text-pink-600 text-lg">
+      <i class="fas fa-ellipsis-h">
+      </i>
+     </button>
+    </section>
+    <section aria-label="Messages" class="flex flex-col gap-4 overflow-y-auto max-h-[480px] pr-1">
+     <!-- Message 1 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Marilyn Kenter, a woman with curly hair" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1470ccd2-678a-4f8a-8f6a-dd80b10ed3ce.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Marilyn Kenter
+       </p>
+       <p class="text-xs text-gray-400 flex items-center gap-1">
+        Are you kidding me?
+        <span aria-label="Thinking face emoji" role="img">
+         🤨
+        </span>
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-17T23:59">
+       Just Now
+      </time>
+     </article>
+     <!-- Message 2 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Talan Levin, a man with short hair and beard" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/13d3dbdb-02ee-4d07-dfdf-e0314bf184f7.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Talan Levin
+       </p>
+       <p class="text-xs text-gray-400 flex items-center gap-1">
+        We have an assignment tomorrow
+        <span aria-label="Briefcase emoji" role="img">
+         💼
+        </span>
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-17T18:45">
+       6:45PM
+      </time>
+     </article>
+     <!-- Message 3 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Alfonso Dokidis, a man with short hair" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/2214a464-c46d-400a-0153-5f61317476d1.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Alfonso Dokidis
+       </p>
+       <p class="text-xs text-gray-400">
+        call me when you are back
+        <span aria-label="Smiling face emoji" role="img">
+         😊
+        </span>
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-17T17:45">
+       5:45PM
+      </time>
+     </article>
+     <!-- Message 4 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Angel Dokidis, a man with short hair" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/f1b5729b-c513-443d-9aaf-1f14221972ff.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Angel Dokidis
+       </p>
+       <p class="text-xs text-gray-400">
+        you know what? I'm not joining the game any...
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-17T14:45">
+       2:45PM
+      </time>
+     </article>
+     <!-- Message 5 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Desirae Carder, a woman with short hair and glasses" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/6cd11a53-d166-47bb-540f-8cbacf0b3195.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Desirae Carder
+       </p>
+       <p class="text-xs text-gray-400">
+        wanna go for a date tomorrow?
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-17T13:45">
+       1:45PM
+      </time>
+     </article>
+     <!-- Message 6 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Marcus Schleifer, a man with short hair" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/a9f15d77-2e53-44c7-40b0-52020632b45a.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Marcus Schleifer
+       </p>
+       <p class="text-xs text-gray-400">
+        Not Interested now
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-12">
+       Mon
+      </time>
+     </article>
+     <!-- Message 7 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Marilyn Curtis, a woman with short hair" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/f0c1bd1e-d9ea-4d7a-6bce-25822602707d.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Marilyn Curtis
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-12">
+       Mon
+      </time>
+     </article>
+     <!-- Message 8 -->
+     <article class="flex items-center gap-3">
+      <img alt="Profile picture of Jaime, a young man with short hair and glasses" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b7241343-6bdb-4238-ab2c-5bfc2ab5d992.jpg" width="40"/>
+      <div class="flex-1">
+       <p class="text-sm font-semibold text-white">
+        Jaime
+       </p>
+      </div>
+      <time class="text-xs text-gray-500 select-none" datetime="2023-06-10">
+       Sat
+      </time>
+     </article>
+    </section>
+    <nav aria-label="Bottom navigation" class="bg-[#2a2f42] rounded-3xl mt-auto flex justify-between items-center px-6 py-3 text-gray-400 text-xl">
+     <button aria-label="Home" class="hover:text-pink-600">
+      <i class="fas fa-home">
+      </i>
+     </button>
+     <button aria-label="Chat" class="bg-[#3a3f56] p-3 rounded-full text-white shadow-lg">
+      <i class="fas fa-comment-alt">
+      </i>
+     </button>
+     <button aria-label="Users" class="hover:text-pink-600">
+      <i class="fas fa-users">
+      </i>
+     </button>
+     <button aria-label="Settings" class="hover:text-pink-600">
+      <i class="fas fa-cog">
+      </i>
+     </button>
+    </nav>
+   </section>
+   <!-- Middle Panel -->
+   <section aria-label="Chat conversation" class="bg-[#1f2433] rounded-3xl w-full max-w-[360px] flex flex-col p-5 text-gray-300">
+    <header class="flex items-center gap-3 mb-5">
+     <button aria-label="Back" class="text-gray-400 text-lg">
+      <i class="fas fa-arrow-left">
+      </i>
+     </button>
+     <img alt="Profile picture of Desirae Carder, a woman with short hair and glasses" class="rounded-full w-10 h-10 object-cover" height="40" loading="lazy" src="https://storage.googleapis.com/a1aa/image/6cd11a53-d166-47bb-540f-8cbacf0b3195.jpg" width="40"/>
+     <div class="flex-1">
+      <p class="text-white font-semibold">
+       Desirae Carder
+      </p>
+      <p class="text-xs text-green-400">
+       UX Design Sucks
+      </p>
+     </div>
+     <button aria-label="Call" class="text-purple-600 text-xl">
+      <i class="fas fa-phone">
+      </i>
+     </button>
+     <button aria-label="Video call" class="text-purple-600 text-xl">
+      <i class="fas fa-video">
+      </i>
+     </button>
+    </header>
+    <main class="flex-1 overflow-y-auto space-y-6">
+     <!-- Message from Marilyn -->
+     <article class="flex flex-col space-y-1 max-w-[80%]">
+      <p class="text-xs text-pink-600 font-semibold">
+       Marilyn,
+       <time class="font-normal text-gray-400" datetime="2023-06-17T21:26">
+        21:26
+       </time>
+      </p>
+      <div class="bg-[#2a2f42] rounded-xl p-3 text-xs text-gray-300 leading-tight relative">
+       Maintenance level is another crucial consideration. If you prefer minimal upkeep, go for hardy plants like th Pothos, which requires minimal care and can be grown in hanging baskets or as a trailing plant, sharing videos, photos, and going live.
+       <button aria-label="Like" class="absolute bottom-1 right-1 text-pink-600 text-xs">
+        <i class="fas fa-heart">
+        </i>
+       </button>
+       <span class="absolute bottom-1 left-2 text-gray-500 text-[9px] italic">
+        Edited
+       </span>
+      </div>
+     </article>
+     <div class="flex justify-center text-xs text-gray-500 select-none">
+      Today
+     </div>
+     <!-- Audio message -->
+     <article class="flex items-center max-w-[80%] bg-[#2a2f42] rounded-xl p-3 space-x-3">
+      <button aria-label="Play audio" class="text-pink-600 text-lg">
+       <i class="fas fa-play">
+       </i>
+      </button>
+      <div class="flex-1">
+       <div class="h-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg relative overflow-hidden">
+        <div class="absolute top-0 left-0 h-6 w-20 bg-white/30 rounded-lg">
+        </div>
+       </div>
+      </div>
+      <time class="text-xs text-gray-400 select-none" datetime="PT4M">
+       4 min
+      </time>
+     </article>
+     <!-- Message with images -->
+     <article class="flex flex-col space-y-1 max-w-[80%]">
+      <p class="text-xs text-pink-600 font-semibold">
+       Marilyn,
+       <time class="font-normal text-gray-400" datetime="2023-06-17T23:59">
+        Just Now
+       </time>
+      </p>
+      <div class="bg-[#2a2f42] rounded-xl p-3 text-xs text-gray-300 leading-tight">
+       Take a look
+      </div>
+      <div class="flex space-x-2 mt-2">
+       <img alt="Phone screen showing a dark mode chat app with purple and pink highlights" class="rounded-lg w-20 h-28 object-cover" height="120" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9e8beed7-65a9-4e29-7cd3-6fe53fdebd8c.jpg" width="80"/>
+       <img alt="Phone screen showing a dark mode chat app with purple and pink highlights" class="rounded-lg w-20 h-28 object-cover" height="120" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9e8beed7-65a9-4e29-7cd3-6fe53fdebd8c.jpg" width="80"/>
+       <img alt="Phone screen showing a dark mode chat app with purple and pink highlights" class="rounded-lg w-20 h-28 object-cover" height="120" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9e8beed7-65a9-4e29-7cd3-6fe53fdebd8c.jpg" width="80"/>
+      </div>
+     </article>
+     <!-- Message from Marilyn -->
+     <article class="flex justify-end max-w-[80%]">
+      <div class="bg-gray-600 rounded-xl p-3 text-xs text-white leading-tight max-w-full">
+       Wow Great !!
+       <span aria-label="Smiling face with heart eyes emoji" role="img">
+        😍
+       </span>
+      </div>
+     </article>
+     <!-- Message from Marilyn -->
+     <article class="flex flex-col space-y-1 max-w-[80%]">
+      <p class="text-xs text-pink-600 font-semibold">
+       Marilyn,
+      </p>
+      <div class="bg-[#2a2f42] rounded-xl p-3 text-xs text-gray-300 leading-tight">
+       !!
+      </div>
+     </article>
+    </main>
+    <footer class="flex items-center gap-3 mt-5">
+     <button aria-label="Add" class="text-pink-600 text-2xl">
+      <i class="fas fa-plus-circle">
+      </i>
+     </button>
+     <input aria-label="Type a message" class="flex-1 rounded-full bg-[#2a2f42] py-2 px-4 text-gray-300 text-sm placeholder-gray-500 focus:outline-none" placeholder="Aa" type="text"/>
+     <button aria-label="Emoji" class="text-gray-400 text-xl">
+      <i class="far fa-smile">
+      </i>
+     </button>
+     <button aria-label="Camera" class="text-gray-400 text-xl">
+      <i class="fas fa-camera">
+      </i>
+     </button>
+    </footer>
+   </section>
+   <!-- Right Panel -->
+   <section aria-label="User profile" class="bg-[#1f2433] rounded-3xl w-full max-w-[360px] flex flex-col p-5 text-gray-300">
+    <div class="flex flex-col items-center mb-6">
+     <img alt="Avatar of Desirae Carder, a woman with colorful hair and sunglasses" class="rounded-3xl w-30 h-30 object-cover mb-4" height="120" loading="lazy" src="https://storage.googleapis.com/a1aa/image/4edb6d31-d2a8-488d-0678-ca8edb720f2d.jpg" width="120"/>
+     <h2 class="text-white font-semibold text-lg flex items-center gap-2">
+      Desirae Carder
+      <button aria-label="Edit profile" class="text-gray-400 hover:text-pink-600 text-sm">
+       <i class="fas fa-pencil-alt">
+       </i>
+      </button>
+     </h2>
+     <p class="text-xs text-gray-400 mt-1">
+      UX Design is fun
+     </p>
+    </div>
+    <div class="flex space-x-6 justify-center mb-6 text-gray-400 text-xl">
+     <button aria-label="Search" class="hover:text-pink-600">
+      <i class="fas fa-search">
+      </i>
+     </button>
+     <button aria-label="Mute notifications" class="hover:text-pink-600">
+      <i class="fas fa-bell-slash">
+      </i>
+     </button>
+     <button aria-label="More options" class="hover:text-pink-600">
+      <i class="fas fa-ellipsis-h">
+      </i>
+     </button>
+    </div>
+    <section class="mb-6">
+     <div class="flex justify-between items-center mb-2">
+      <h3 class="text-xs text-gray-400 font-semibold">
+       Media
+      </h3>
+      <button class="text-xs text-pink-600 font-semibold">
+       See All
+      </button>
+     </div>
+     <div class="flex space-x-2 overflow-x-auto pb-2">
+      <img alt="Photo of a fruit basket with apples and grapes" class="rounded-lg w-16 h-16 object-cover flex-shrink-0" height="70" loading="lazy" src="https://storage.googleapis.com/a1aa/image/73b1c2f1-2a2d-49c6-db17-b761bceef5ea.jpg" width="70"/>
+      <img alt="Photo of a group of friends smiling and posing for a picture" class="rounded-lg w-16 h-16 object-cover flex-shrink-0" height="70" loading="lazy" src="https://storage.googleapis.com/a1aa/image/416e0b01-2fd7-45c9-89b6-73c6ddf2e99a.jpg" width="70"/>
+      <img alt="Photo of a pizza party with several people around a table" class="rounded-lg w-16 h-16 object-cover flex-shrink-0" height="70" loading="lazy" src="https://storage.googleapis.com/a1aa/image/6d1b3abb-fcce-4a2a-ef55-544ce13f14be.jpg" width="70"/>
+      <img alt="Photo of friends having dinner together at a restaurant" class="rounded-lg w-16 h-16 object-cover flex-shrink-0" height="70" loading="lazy" src="https://storage.googleapis.com/a1aa/image/2692242c-edad-48dd-2e91-43a15b0fa67b.jpg" width="70"/>
+     </div>
+    </section>
+    <section class="space-y-4 text-xs text-gray-400">
+     <div class="flex justify-between items-center">
+      <span>
+       Share Chat Link
+      </span>
+      <span class="text-white font-semibold">
+       On
+      </span>
+      <button aria-label="Toggle share chat link" class="text-pink-600 text-sm">
+       <i class="fas fa-chevron-right">
+       </i>
+      </button>
+     </div>
+     <div class="flex justify-between items-center">
+      <span>
+       Participants
+      </span>
+      <button aria-label="Participants settings" class="text-pink-600 text-sm">
+       <i class="fas fa-chevron-right">
+       </i>
+      </button>
+     </div>
+     <div class="flex justify-between items-center">
+      <span>
+       Theme
+      </span>
+      <div class="flex items-center space-x-2">
+       <span class="text-white font-semibold">
+        Default
+       </span>
+       <button aria-label="Change theme" class="w-5 h-5 rounded-full bg-gradient-to-r from-pink-600 to-purple-600">
+       </button>
+       <button aria-label="Change theme" class="w-5 h-5 rounded-full bg-gray-600">
+       </button>
+      </div>
+     </div>
+     <div class="flex justify-between items-center">
+      <span>
+       Mute Notifications
+      </span>
+      <label class="inline-flex relative items-center cursor-pointer" for="mute-toggle">
+       <input checked="" class="sr-only peer" id="mute-toggle" type="checkbox" value=""/>
+       <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-pink-600 peer-checked:bg-pink-600 relative">
+       </div>
+       <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-5">
+       </div>
+      </label>
+     </div>
+    </section>
+    <section class="text-xs space-y-2">
+     <button class="text-pink-600 font-semibold">
+      Block
+     </button>
+     <div>
+      <button class="text-gray-500 font-semibold">
+       Report
+      </button>
+      <p class="text-gray-600 text-[10px] mt-1">
+       Give feedback and report the conversations
+      </p>
+     </div>
+    </section>
+   </section>
+  </div>
+ </body>
+</html>
