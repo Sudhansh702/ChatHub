@@ -20,6 +20,8 @@ app.get('/', (req, res) => {
 
 // Authentication routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/connections', require('./routes/connections'));
+app.use('/api/messages', require('./routes/messages.js'));
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);

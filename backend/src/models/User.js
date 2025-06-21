@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
     required: true,
+    unique: true
   },
   email: {
     type: String,
@@ -19,7 +20,13 @@ const userSchema = new mongoose.Schema({
   profilePic:{
     type : String,
     default: ""
-  }
+  },
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    }
+  ]
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

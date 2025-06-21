@@ -13,8 +13,8 @@ const signup = async (req, res) => {
       return res.status(400).json({ msg: 'Password must be at least 8 characters long' });
     }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ msg: 'Email already exists' });
+    const existingUser = await User.findOne({ $or: [ { email }, { fullname } ] });
+    if (existingUser) return res.status(400).json({ msg: 'Email or fullname already exists' });
 
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await User.create({ fullname, email, passwordHash });
@@ -85,11 +85,11 @@ const updateProfilepic = async (req, res) =>{
     if(!picture){
       return res.status(400).json({ msg: 'Picture Required' });
     }
-    // const uploadResponse = await cloudinary.uploader.upload(picture);
+    const uploadResponse = await cloudinary.uploader.upload(picture);
 
-    // const user = await User.findByIdAndUpdate(userId, { profilePic : uploadResponse.secure_url} , {new : true});
+    const user = await User.findByIdAndUpdate(userId, { profilePic : uploadResponse.secure_url} , {new : true});
 
-    // res.status(200).json(user);
+    res.status(200).json(user);
 
   } catch (error) {
     console.log('Error in updateProfilePic controller', error.message);
