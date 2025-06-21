@@ -1,46 +1,109 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { cloudinary } = require('../utils/cloudinary')
 
 const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { fullname, email, password } = req.body;
+    if(!fullname || !email || !password) {
+      return res.status(400).json({ msg: 'All feild are Required' });
+    }
+    if(password.length < 8) {
+      return res.status(400).json({ msg: 'Password must be at least 8 characters long' });
+    }
 
-    const existingUser = await User.findOne({ where: { email } });
+    const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ msg: 'Email already exists' });
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, email, passwordHash });
+    const user = await User.create({ fullname, email, passwordHash });
 
     // Automatically log in the user after signup
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.sign({ _id : user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.cookie("token",token,{
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === 'production', 
+      maxAge: 7 * 24 * 60 * 60 * 1000 
+    })
 
     res.status(201).json({
       msg: 'User created',
-      token,
-      user: { id: user.id, username: user.username, email: user.email }
+      user: { id: user.id, fullname: user.fullname, email: user.email }
     });
   } catch (err) {
+    console.log('Error in Login controller', err.message);
     res.status(500).json({ msg: 'Server error', err });
   }
 };
 
 const login = async (req, res) => {
+  const {email , password} = req.body;
+  if(!email || !password) {
+    return res.status(400).json({ msg: 'All fields are required' });
+  }
   try {
-    const { email,password } = req.body;
+    const user = await User.findOne({email});
+    if (!user) return res.status(400).json({ msg: 'Invalid Credentials ' });
 
-    const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
+    const isPassCorrect = await bcrypt.compare(password, user.passwordHash );
+    if (!isPassCorrect) return res.status(400).json({ msg: 'Invalid Credentials' });
 
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
-
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-    res.json({ token, user: { id: user.id, username: user.username, email: user.email } });
-  } catch (err) {
-    res.status(500).json({ msg: 'Server error', err });
+    const token = jwt.sign({ _id : user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
+    res.status(200).json({
+      msg: 'login successfull',
+      user: { id: user.id, fullname: user.fullname, email: user.email }
+    })
+  } catch (error) {
+    console.log('Error in Login controller' , error.message);
+    res.status(500).json({ msg: 'Server error', error });
   }
 };
+ 
+const logout = async (req, res) =>{
+  try {
+    res.cookie("token", "" ,{maxAge: 0});
+    res.status(200).json({msg: "Logged Out."});
+  } catch (error) {
+    console.log('Error in Logout controller', error.message);
+    res.status(500).json({ msg: 'Server error', error });
+  }
+}
 
-module.exports = { signup, login };
+const updateProfilepic = async (req, res) =>{
+  try {
+    const {picture} = req.body;
+    const userId = req.user._id;
+    if(!picture){
+      return res.status(400).json({ msg: 'Picture Required' });
+    }
+    // const uploadResponse = await cloudinary.uploader.upload(picture);
+
+    // const user = await User.findByIdAndUpdate(userId, { profilePic : uploadResponse.secure_url} , {new : true});
+
+    // res.status(200).json(user);
+
+  } catch (error) {
+    console.log('Error in updateProfilePic controller', error.message);
+    res.status(500).json({ msg: 'Server error', error });
+  }
+}
+
+const checkAuth = async (req,res)=>{
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.log('Error in checkAuth controller', error.message);
+    res.status(500).json({ msg: 'Server error', error });    
+  }
+}
+
+module.exports = { signup, login, logout , updateProfilepic , checkAuth};
