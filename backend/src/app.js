@@ -1,8 +1,11 @@
 const express = require('express');
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const {app, server, io} = require('./utils/socket'); 
 
-const app = express();
+const path = require('path');
+const __dirname = path.resolve();
+
 
 require('dotenv').config();
 
@@ -27,6 +30,13 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/connections', require('./routes/connections'));
 app.use('/api/messages', require('./routes/messages.js'));
 
-app.listen(process.env.PORT || 5000, () => {
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend','dist','index.html'));
+  });
+}
+
+server.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });

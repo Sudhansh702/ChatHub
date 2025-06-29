@@ -1,6 +1,6 @@
 const Message = require('../models/Messages')
 
-const User = require('../models/User')
+const { getReciversSoketId , io} = require('../utils/socket')
 const cloudinary = require('../utils/cloudinary')
 
 const getmessages = async (req, res) => {
@@ -14,7 +14,6 @@ const getmessages = async (req, res) => {
         { senderId: friendId, reciverId: myId }
       ]
     })
-      .limit(20);
 
     res.status(200).json(latestChat);
   } catch (error) {
@@ -37,7 +36,13 @@ const sendmsg = async (req, res) => {
       messageData.imageUrl = imageUrl;
     }
     const newMsg = await Message.create(messageData);
-    // todo Socket.io
+    //  Socket.io
+
+    const reciverSocketId = getReciversSoketId(friendId);
+
+    if(reciverSocketId){
+      io.to(reciverSocketId).emit('getMessage', newMsg)
+    }
 
     res.status(200).json(newMsg);
   } catch (error) {
