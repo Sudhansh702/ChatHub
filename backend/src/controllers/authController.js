@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const cloudinary = require('../utils/cloudinary'); 
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import cloudinary from '../utils/cloudinary.js'; 
 
 const signup = async (req, res) => {
   try {
@@ -106,4 +106,4 @@ const checkAuth = async (req,res)=>{
   }
 }
 
-module.exports = { signup, login, logout , updateProfilepic , checkAuth};
+export { signup, login, logout, updateProfilepic, checkAuth };

@@ -1,9 +1,10 @@
-const express = require('express')
+import express from 'express';
+import { verifyToken } from '../middlewares/authMiddleware.js';
+import { getmessages, sendmsg } from '../controllers/messageController.js';
+
 const router = express.Router();
-const { verifyToken } = require('../middlewares/authMiddleware')
-const { getmessages , sendmsg } = require('../controllers/messageController.js')
 
-router.get('/getmessages/:id',verifyToken , getmessages);
-router.post('/send/:id',verifyToken , sendmsg);
+router.get('/getmessages/:id', verifyToken, getmessages);
+router.post('/send/:id', verifyToken, sendmsg);
 
-module.exports = router;
+export default router;

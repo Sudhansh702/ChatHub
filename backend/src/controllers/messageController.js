@@ -1,7 +1,6 @@
-const Message = require('../models/Messages')
-
-const User = require('../models/User')
-const cloudinary = require('../utils/cloudinary')
+import Message from '../models/Messages.js';
+import { getReciversSoketId, io } from '../utils/socket.js';
+import cloudinary from '../utils/cloudinary.js';
 
 const getmessages = async (req, res) => {
   try {
@@ -14,7 +13,6 @@ const getmessages = async (req, res) => {
         { senderId: friendId, reciverId: myId }
       ]
     })
-      .limit(20);
 
     res.status(200).json(latestChat);
   } catch (error) {
@@ -37,7 +35,13 @@ const sendmsg = async (req, res) => {
       messageData.imageUrl = imageUrl;
     }
     const newMsg = await Message.create(messageData);
-    // todo Socket.io
+    //  Socket.io
+
+    const reciverSocketId = getReciversSoketId(friendId);
+
+    if(reciverSocketId){
+      io.to(reciverSocketId).emit('getMessage', newMsg)
+    }
 
     res.status(200).json(newMsg);
   } catch (error) {
@@ -46,9 +50,4 @@ const sendmsg = async (req, res) => {
   }
 }
 
-
-
-module.exports = {
-  getmessages,
-  sendmsg
-}
+export { getmessages, sendmsg };

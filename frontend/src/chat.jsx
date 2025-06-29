@@ -7,14 +7,18 @@ import toast from 'react-hot-toast';
 
 
 export default function chat() {
-  const { users, sendMessage, messages, getMessages } = useChatStore();
+  const { users, sendMessage, messages, getMessages, listenToMessage, notListenToMessage } = useChatStore();
   const { id } = useParams();
   const friend = users.find(users => String(users._id) === String(id));
   useEffect(() => {
     if (friend) {
       getMessages(friend._id);
     }
-  }, [friend]);
+    listenToMessage(friend);
+    return () => {
+      notListenToMessage();
+    }
+  }, [friend, listenToMessage, notListenToMessage]);
 
   const [text, setText] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
@@ -90,7 +94,7 @@ export default function chat() {
         </div>
       )}
       
-      <section aria-label="Chat conversation" className="bg-[#0d121c]  w-full h-full flex flex-col text-gray-300">
+      <section aria-label="Chat conversation" className="flex flex-col flex-1 h-full w-full text-gray-300 bg-[#0d121c]">
         <header className="flex items-center gap-3 my-3 m-5">
           <Link to="/" aria-label="Back" className="text-gray-400 text-lg">
             <i className="fas fa-arrow-left">
@@ -123,7 +127,7 @@ export default function chat() {
 
         </header>
 
-        <main className="flex flex-col flex-1 justify-end overflow-y-scroll space-y-4 w-full  bg-[url('./assets/chat-bg.svg')] bg-cover p-5">
+        <main className="flex flex-col flex-1 overflow-y-auto space-y-4 w-full bg-[url('./assets/chat-bg.svg')] bg-cover p-5">
           {messages.map((message, index) => (
             <article key={index} className={`flex ${message.senderId === id ? 'justify-start' : 'justify-end'} max-w-[100%]`}>
               <div className={`rounded-xl p-3 text-xs leading-tight max-w-full ${message.senderId === id ? 'bg-blue-900 text-white' : 'bg-gray-600 text-gray-300'

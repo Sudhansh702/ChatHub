@@ -1,13 +1,16 @@
-const express = require('express');
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { app, server, io } from './utils/socket.js';
+import path from 'path';
+import dotenv from 'dotenv';
+import connectDb from './utils/connectDb.js';
 
-const app = express();
+const dirname = path.resolve();
 
-require('dotenv').config();
+dotenv.config();
 
 // Database connection
-const connectDb = require('./utils/connectDb');
 connectDb();
 
 app.use(express.json({ limit: '10mb' })); // or higher if needed
@@ -23,10 +26,21 @@ app.get('/', (req, res) => {
 });
 
 // Authentication routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/connections', require('./routes/connections'));
-app.use('/api/messages', require('./routes/messages.js'));
+import authRoutes from './routes/auth.js';
+import connectionsRoutes from './routes/connections.js';
+import messagesRoutes from './routes/messages.js';
 
-app.listen(process.env.PORT || 5000, () => {
+app.use('/api/auth', authRoutes);
+app.use('/api/connections', connectionsRoutes);
+app.use('/api/messages', messagesRoutes);
+
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(dirname, '../frontend/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(dirname, '../frontend','dist','index.html'));
+  });
+}
+
+server.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });

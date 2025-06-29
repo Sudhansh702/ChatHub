@@ -1,10 +1,11 @@
-const express = require('express')
+import express from 'express';
+import { verifyToken } from '../middlewares/authMiddleware.js';
+import { getuser, searchUser, adduser } from '../controllers/connectionsController.js';
+
 const router = express.Router();
-const {verifyToken} = require('../middlewares/authMiddleware')
-const { getuser, searchUser, adduser } = require('../controllers/connectionsController')
 
 router.get('/getuser', verifyToken, getuser);
-router.get('/searchuser/:fullname', verifyToken , searchUser);
-router.post('/adduser/:id',verifyToken , adduser);
+router.get('/searchuser/:fullname', verifyToken, searchUser);
+router.post('/adduser/:id', verifyToken, adduser);
 
-module.exports = router;
+export default router;
