@@ -7,7 +7,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', logout);
 
-router.patch('/update-profilepic', verifyToken, updateProfilepic);
+router.put('/update-profilepic', verifyToken, updateProfilepic);
 
 router.get('/check', verifyToken , checkAuth);
 

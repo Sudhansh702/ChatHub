@@ -18,15 +18,21 @@ const getuser = async (req,res) =>{
 }
 const searchUser = async (req,res) =>{
   try { 
+    var user ;
     const fullname = req.params.fullname;
-    const user = await User.
-    find({
-      _id :{$ne : req.user._id} ,
-      fullname: { $regex: fullname, $options: 'i' } })
-    .select("fullname email profilePic");
+    if (fullname === "anything" ){
+      user = await User.find({_id: { $ne: req.user._id }}).limit(10).select("fullname email profilePic");
+    }else{
+      user = await User.
+      find({
+        _id :{$ne : req.user._id} ,
+        fullname: { $regex: fullname, $options: 'i' } }).limit(30)
+        .select("fullname email profilePic");
+      }
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }   
+    // console.log("user",user);
     res.status(200).json(user);
   } catch (error) {
     console.log("Error in getFriendsController",error.message);

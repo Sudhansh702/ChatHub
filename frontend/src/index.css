@@ -24,3 +24,7 @@
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+input:focus {
+  outline: none;
+}

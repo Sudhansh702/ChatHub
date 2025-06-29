@@ -14,7 +14,6 @@ const getmessages = async (req, res) => {
         { senderId: friendId, reciverId: myId }
       ]
     })
-      .sort({ createdAt: -1 })
       .limit(20);
 
     res.status(200).json(latestChat);
@@ -33,7 +32,11 @@ const sendmsg = async (req, res) => {
       const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.secure_url;
     }
-    const newMsg = await Message.create({ senderId: myId, reciverId: friendId, text ,imageUrl });
+    const messageData = { senderId: myId, reciverId: friendId, text };
+    if (imageUrl) {
+      messageData.imageUrl = imageUrl;
+    }
+    const newMsg = await Message.create(messageData);
     // todo Socket.io
 
     res.status(200).json(newMsg);
