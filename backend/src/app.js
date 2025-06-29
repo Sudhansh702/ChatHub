@@ -21,9 +21,9 @@ app.use(cors({
   credentials: true,
 }));
 
-app.get('/', (req, res) => {
-  res.send('API is working');
-});
+// app.get('/', (req, res) => {
+//   res.send('API is working');
+// });
 
 // Authentication routes
 import authRoutes from './routes/auth.js';
@@ -36,11 +36,12 @@ app.use('/api/messages', messagesRoutes);
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(dirname, '../frontend/dist')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(dirname, '../frontend','dist','index.html'));
+  app.get('/*spalt', (req, res) => {
+    res.sendFile(path.join(dirname, '../frontend', 'dist', 'index.html'));
   });
 }
 
 server.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });
+ 
