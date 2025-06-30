@@ -36,9 +36,6 @@ export default function frndCard({ id, name, lastMsg, lastMsgTime, profilePic, m
             {isOnline ? 'Online' : 'Offline'}
           </p>
         </div>
-        <time className="text-xs text-gray-500 select-none" dateTime="2023-06-17T23:59">
-          {lastMsgTime}
-        </time>
       </article>
     </ Link>
   );

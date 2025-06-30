@@ -116,15 +116,6 @@ export default function chat() {
             </p>
           </div>
 
-          <button aria-label="Call" className="text-purple-600 text-xl">
-            <i className="fas fa-phone">
-            </i>
-          </button>
-          <button aria-label="Video call" className="text-purple-600 text-xl">
-            <i className="fas fa-video">
-            </i>
-          </button>
-
         </header>
 
         <main className="flex flex-col flex-1 overflow-y-auto space-y-4 w-full bg-[url('./assets/chat-bg.svg')] bg-cover p-5">

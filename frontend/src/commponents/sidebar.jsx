@@ -92,7 +92,7 @@ export default function Sidebar() {
               <i className="fas fa-search"></i>
             </button>
             {search.length > 0 && showResults &&
-            <div className='rounded-b p-2 bg-gray-700 w-full absolute'>
+            <div className='rounded-b p-2 bg-gray-700 w-full absolute z-10 overflow-y-scroll max-h-60'>
               {search}
             </div>}
           </form>

@@ -44,7 +44,7 @@ export default function App() {
               authUser ? (
                 <div className='flex h-screen'>
                   <Sidebar  />
-                  <main className="flex-2/3 h-screen bg-gray-100 p-4 bg-[url('./assets/chat-bg.svg')] bg-cover"></main>
+                  <main className="flex-2/3 h-screen bg-gray-100 p-4 bg-[url('./assets/chat-bg.svg')] bg-cover portrait:hidden"></main>
                 </div>) :
                 (<Navigate to="/signin" />)
             }
