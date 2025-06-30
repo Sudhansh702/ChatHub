@@ -21,7 +21,7 @@ const searchUser = async (req,res) =>{
     var user ;
     const fullname = req.params.fullname;
     if (fullname === "anything" ){
-      user = await User.find({_id: { $ne: req.user._id }}).limit(10).select("fullname email profilePic");
+      user = await User.find({_id: { $ne: req.user._id }}).limit(50).select("fullname email profilePic");
     }else{
       user = await User.
       find({

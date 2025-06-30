@@ -7,7 +7,7 @@ import Chat from './chat.jsx';
 import SocialImg from './assets/chat-bg.svg'
 
 import { BrowserRouter as Router, Route, Routes, useParams, Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Loader } from 'lucide-react'
 import { Toaster } from 'react-hot-toast';
 
@@ -19,8 +19,8 @@ export default function App() {
   console.log("App component rendered");
 
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
-  const {getuser,users} = useChatStore();
-  
+  const { getuser, users } = useChatStore();
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -33,7 +33,6 @@ export default function App() {
     )
   }
 
-
   return (
     <>
       <Router>
@@ -43,7 +42,7 @@ export default function App() {
             element={
               authUser ? (
                 <div className='flex h-screen'>
-                  <Sidebar  />
+                  <Sidebar />
                   <main className="flex-2/3 h-screen bg-gray-100 p-4 bg-[url('./assets/chat-bg.svg')] bg-cover portrait:hidden"></main>
                 </div>) :
                 (<Navigate to="/signin" />)
@@ -54,8 +53,10 @@ export default function App() {
             element={
               authUser ? (
                 <div className='flex h-screen'>
-                    <Sidebar  />
-                    <Chat  />
+                  <div className='flex-1/3 w-full h-full portrait:hidden'>
+                    <Sidebar />
+                  </div>
+                  <Chat />
                 </div>) :
                 (<Navigate to="/signin" />)
             }
@@ -65,8 +66,8 @@ export default function App() {
             element={
               !authUser ? (
                 <div className="flex bg-white not-landscape:block">
-                    {/* <SidebarAuth /> */}
-                    <SignInPage />
+                  {/* <SidebarAuth /> */}
+                  <SignInPage />
                 </div>) :
                 (<Navigate to="/" />)
             }
@@ -76,8 +77,8 @@ export default function App() {
             element={
               !authUser ? (
                 <div className="flex bg-white not-landscape:block">
-                    {/* <SidebarAuth /> */}
-                    <SignUpPage />
+                  {/* <SidebarAuth /> */}
+                  <SignUpPage />
                 </div>) :
                 (<Navigate to="/" />)
             }

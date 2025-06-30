@@ -167,7 +167,7 @@ export default function chat() {
               ref={fileInputRef}
               className="hidden"
             />
-            <button type='button' aria-label="Add" className={`hidden sm:flex btn btn-circle ${imagePreview ? 'btn-error' : 'btn-primary'} text-white cursor-pointer`}
+            <button type='button' aria-label="Add" className={`sm:flex  text-white cursor-pointer`}
               onClick={() => fileInputRef.current?.click()}>
               <i className="fas fa-images"></i>
             </button>

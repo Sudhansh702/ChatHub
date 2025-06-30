@@ -15,7 +15,7 @@ const useChatStore = create((set, get) => ({
   getuser: async () => {
     set({ isUserLoading: true });
     try {
-      console.log("Fetching users...");
+      // console.log("Fetching users...");
       const res = await axiosInstance.get("/connections/getuser");
       set({ users: res.data })
     } catch (error) {
@@ -43,6 +43,7 @@ const useChatStore = create((set, get) => ({
       if (res.status === 200) {
         toast.success("User added successfully");
       }
+      get().getuser();
     } catch (error) {
       toast.error("Failed to search users");
     } finally {
@@ -65,7 +66,7 @@ const useChatStore = create((set, get) => ({
     set({ isMessagesLoading: true });
     try {
       const res = await axiosInstance.get(`/messages/getmessages/${userId}`);
-      console.log("Messages fetched:", res.data);
+      // console.log("Messages fetched:", res.data);
         set({ messages: res.data });
     } catch (error) {
       toast.error("Failed to fetch messages");
@@ -80,11 +81,11 @@ const useChatStore = create((set, get) => ({
     if (!friend) {
       return;
     }
-    console.log("Listening to messages...");
+    // console.log("Listening to messages...");
     const socket = useAuthStore.getState().socket;
 
     socket.on('getMessage', (data) => {
-      console.log("New message received:", data);
+      // console.log("New message received:", data);
       set({ messages: [...get().messages, data] });
     });
   },

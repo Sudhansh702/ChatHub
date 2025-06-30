@@ -97,7 +97,7 @@ export default function Sidebar() {
             </div>}
           </form>
 
-          <div className="flex flex-col gap-4 w-full mt-2">
+          <div className="flex flex-col gap-4 w-full mt-2 overflow-auto ">
             {showProfile ? friends : <Profile />}
           </div>
         </div>
